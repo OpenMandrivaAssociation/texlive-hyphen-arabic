@@ -5,8 +5,8 @@
 # catalog-license undef
 # catalog-version undef
 Name:		texlive-hyphen-arabic
-Version:	20111103
-Release:	2
+Version:	20120124
+Release:	1
 Summary:	(No) Arabic hyphenation patterns
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -44,14 +44,16 @@ Prevent hyphenation in Arabic.
 %install
 mkdir -p %{buildroot}%{_texmf_language_dat_d}
 cat > %{buildroot}%{_texmf_language_dat_d}/hyphen-arabic <<EOF
-\%\% from hyphen-arabic:
+\%% from hyphen-arabic:
 arabic zerohyph.tex
 EOF
+perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_dat_d}/hyphen-arabic
 mkdir -p %{buildroot}%{_texmf_language_def_d}
 cat > %{buildroot}%{_texmf_language_def_d}/hyphen-arabic <<EOF
-\%\% from hyphen-arabic:
+\%% from hyphen-arabic:
 \addlanguage{arabic}{zerohyph.tex}{}{2}{3}
 EOF
+perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_def_d}/hyphen-arabic
 mkdir -p %{buildroot}%{_texmf_language_lua_d}
 cat > %{buildroot}%{_texmf_language_lua_d}/hyphen-arabic <<EOF
 -- from hyphen-arabic:
