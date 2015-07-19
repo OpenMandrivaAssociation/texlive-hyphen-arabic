@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-hyphen-arabic
 Version:	20120124
-Release:	8
+Release:	9
 Summary:	(No) Arabic hyphenation patterns
 Group:		Publishing
 URL:		http://tug.org/texlive
