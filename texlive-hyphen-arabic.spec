@@ -5,8 +5,8 @@
 # catalog-license undef
 # catalog-version undef
 Name:		texlive-hyphen-arabic
-Version:	20180303
-Release:	2
+Version:	20190406
+Release:	1
 Summary:	(No) Arabic hyphenation patterns
 Group:		Publishing
 URL:		http://tug.org/texlive
