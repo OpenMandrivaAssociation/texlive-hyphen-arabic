@@ -1,6 +1,6 @@
 Name:		texlive-hyphen-arabic
-Version:	54568
-Release:	2
+Version:	74115
+Release:	1
 Summary:	(No) Arabic hyphenation patterns
 Group:		Publishing
 URL:		https://tug.org/texlive
