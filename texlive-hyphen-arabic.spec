@@ -1,61 +1,20 @@
-Name:		texlive-hyphen-arabic
-Version:	74115
+%global tl_name hyphen-arabic
+%global tl_revision 74115
+
+Name:		texlive-%{tl_name}
+Version:	%{tl_revision}
 Release:	1
-Summary:	(No) Arabic hyphenation patterns
+Summary:	(No) Arabic hyphenation patterns.
 Group:		Publishing
-URL:		https://tug.org/texlive
-License:	http://www.tug.org/texlive/LICENSE.TL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/hyphen-arabic.r%{version}.tar.xz
+URL:		https://www.ctan.org/pkg/hyphen-arabic
+License:	LPPL
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/hyphen-arabic.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-hyphen-base
-Requires:	texlive-hyph-utf8
+BuildSystem:	texlive
+Requires:	texlive(hyph-utf8)
+Requires:	texlive(hyphen-base)
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
 Prevent hyphenation in Arabic.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%_texmf_language_dat_d/hyphen-arabic
-%_texmf_language_def_d/hyphen-arabic
-%_texmf_language_lua_d/hyphen-arabic
-
-#-----------------------------------------------------------------------
-%prep
-%autosetup -p1 -c
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmf_language_dat_d}
-cat > %{buildroot}%{_texmf_language_dat_d}/hyphen-arabic <<EOF
-\%% from hyphen-arabic:
-arabic zerohyph.tex
-EOF
-perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_dat_d}/hyphen-arabic
-mkdir -p %{buildroot}%{_texmf_language_def_d}
-cat > %{buildroot}%{_texmf_language_def_d}/hyphen-arabic <<EOF
-\%% from hyphen-arabic:
-\addlanguage{arabic}{zerohyph.tex}{}{2}{3}
-EOF
-perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_def_d}/hyphen-arabic
-mkdir -p %{buildroot}%{_texmf_language_lua_d}
-cat > %{buildroot}%{_texmf_language_lua_d}/hyphen-arabic <<EOF
--- from hyphen-arabic:
-	['arabic'] = {
-		loader = 'zerohyph.tex',
-		lefthyphenmin = 2,
-		righthyphenmin = 3,
-		synonyms = {  },
-		patterns = '',
-	},
-EOF
